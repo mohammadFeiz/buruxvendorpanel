@@ -69,11 +69,11 @@ class BVP extends Component{
             return <img className='p-12 p-t-48' style={{boxSizing:'border-box'}} src={bmsrc} width='100%'/>
           }}
           body={({navId})=>{
-            return (
-              <OrderPopup
-                order={{buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000}}
-              />
-            )
+            // return (
+            //   <OrderPopup
+            //     order={{buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000}}
+            //   />
+            // )
             if(navId === 'orders'){return <Orders/>}
           }}
           header={()=><Header/>}

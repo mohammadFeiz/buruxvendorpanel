@@ -7,6 +7,9 @@ export default function getResponse(){
         },
         get_orders(){
             return {mock:true}
+        },
+        get_salers_by_coords(){
+            return {mock:true}
         }
     }
 }
@@ -16,41 +19,96 @@ export function getMock(){
     return {
         get_orders(){
             return [
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
-                {buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000},
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                },
+                {
+                    buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,
+                    phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',
+                    date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000
+                }
             ]
         },
         order_status_dic(){
@@ -81,6 +139,36 @@ export function getMock(){
                     'سفارش لفو شده است'
                 ],
             }
+        },
+        get_salers_by_coords(){
+            return [
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
+                
+            ]
         }
     }
+}
+
+
+function getRandom(){
+    let sign = Math.round(Math.random())?1:-1
+    return (Math.round(Math.random() * 10) / 1000 * sign)
 }

@@ -112,6 +112,15 @@ export default class Map extends Component {
             this.setState({delay:false})
         },delay)
     }
+    handleMarkers(){
+        let {points = []} = this.props; 
+        for(let i = 0; i < points.length; i++){
+            let {latitude,longitude,icon} = points[i]
+            this.L.marker([latitude, longitude],{icon:this.L.divIcon({html: icon})})
+            .addTo(this.map)
+            .bindPopup('marker.');
+        }
+    }
     render() {
         let {
             changeView, zoom = 12, onClick, style, search,
@@ -143,9 +152,11 @@ export default class Map extends Component {
                     }}
                     onInit={(L, myMap) => {
                         this.map = myMap;
+                        this.L = L;
                         this.marker = L.marker([latitude, longitude])
                             .addTo(myMap)
                             .bindPopup('I am a popup.');
+                        
                         if (onClick) {
                             myMap.on('click', (e) => onClick());
                         }
@@ -162,7 +173,7 @@ export default class Map extends Component {
                                 this.panTo(lat, lng);
                             });
                         }
-
+                        this.handleMarkers()
                         // L.circle([35.699739, 51.338097], {
                         // color: 'dodgerblue',
                         // fillColor: 'dodgerblue',
