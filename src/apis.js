@@ -13,6 +13,9 @@ export default function getResponse(){
         },
         get_salers(){
             return {mock:true}
+        },
+        getBazargahDetailsBySaler(){
+            return {mock:true}
         }
     }
 }
@@ -169,32 +172,43 @@ export function getMock(){
         },
         get_salers(){
             return [
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
-                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
+                {name:"دانیال عنایتی",code:'c23222',province:'تهران',city:'تهران',phone:'09123534314',status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'},
             ]
+        },
+        getBazargahDetailsBySaler(saler){
+            return {
+                zamaneAkhz:20,radius:12,
+                activity:{
+                    waitOfSend:1,
+                    waitOfDelivery:1,
+                    delivered:4,
+                    canseled:5
+                }
+            }
         }
     }
 }

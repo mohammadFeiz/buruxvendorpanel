@@ -4,6 +4,8 @@ import Table from './../npm/aio-table/aio-table';
 import AIODate from "../npm/aio-date/aio-date";
 import SplitNumber from "../npm/aio-functions/split-number";
 import AppContext from "../app-context";
+import {Icon} from "@mdi/react";
+import { mdiDotsHorizontal } from "@mdi/js";
 export default class Salers extends Component{
     static contextType = AppContext;
     constructor(props){
@@ -26,8 +28,19 @@ export default class Salers extends Component{
             flex:1,
             html:(
                 <Table
+                    templates={{
+                        popup:(row)=>{
+                            let {openPopup} = this.context;
+                            return (
+                                <Icon path={mdiDotsHorizontal} size={1} onClick={()=>{
+                                    openPopup('saler',row)
+                                }}/>
+                            )
+                        }
+                    }}
                     style={{height:'100%'}}
                     columns={[
+                        {template:'popup'},
                         {title:'نام و نام خانوادگی',field:'row.name'},
                         {title:'کد فروشنده',field:'row.code'},
                         {title:'استان',field:'row.state'},

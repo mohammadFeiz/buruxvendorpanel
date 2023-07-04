@@ -4,6 +4,8 @@ import Table from './../npm/aio-table/aio-table';
 import AIODate from "../npm/aio-date/aio-date";
 import SplitNumber from "../npm/aio-functions/split-number";
 import AppContext from "../app-context";
+import { mdiDotsHorizontal } from "@mdi/js";
+import {Icon} from '@mdi/react';
 export default class Orders extends Component{
     static contextType = AppContext;
     constructor(props){
@@ -34,10 +36,19 @@ export default class Orders extends Component{
                         amount:(row)=>SplitNumber(row.amount),
                         date:(row)=>{
                             if(row.date){return AIODate().toJalali({date:row.date,pattern:'{year}/{month}/{day} {hour}:{minute}'})}
+                        },
+                        popup:(row)=>{
+                            let {openPopup} = this.context;
+                            return (
+                                <Icon path={mdiDotsHorizontal} size={1} onClick={()=>{
+                                    openPopup('order',row)
+                                }}/>
+                            )
                         }
                     }}
                     style={{height:'100%'}}
                     columns={[
+                        {template:'popup'},
                         {title:'شماره سفارش',field:'row.number'},
                         {title:'فروشنده',field:'row.saler'},
                         {title:'آخرین وضعیت',field:'row.status'},

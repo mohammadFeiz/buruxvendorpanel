@@ -5,6 +5,7 @@ import AIOService from './npm/aio-service/aio-service';
 import getResponse,{getMock} from './apis';
 import AIOInput from './npm/aio-input/aio-input';
 import OrderPopup from './popups/order-popup';
+import SalerPopup from './popups/saler-popup';
 import bmsrc from './images/bm.png';
 import {Icon} from '@mdi/react';
 import Orders from './pages/orders';
@@ -18,7 +19,6 @@ export default class App extends Component{
     return <BVP/>
   }
 }
-
 
 class BVP extends Component{
   constructor(props){
@@ -35,6 +35,7 @@ class BVP extends Component{
   }
   getContext(){
     return {
+      openPopup:this.openPopup.bind(this),
       ...this.state
     }
   }
@@ -54,6 +55,13 @@ class BVP extends Component{
         body:()=><OrderPopup order={parameter}/>
       })
     }
+    if(key === 'saler'){
+      addPopup({
+        type:'fullscreen',
+        //title:`شماره فاکتور ${parameter.number}`,
+        body:()=><SalerPopup saler={parameter}/>
+      })
+    }
   }
   render(){
     return (
@@ -67,19 +75,14 @@ class BVP extends Component{
             {text:'مدیریت کاربران',icon:<Icon path={mdiAccount} size={1}/>,id:'user manager'}
           ]}
           navHeader={()=>{
-            return <img className='p-12 p-t-48' style={{boxSizing:'border-box'}} src={bmsrc} width='100%'/>
+            return <img className='p-12 p-t-48' style={{boxSizing:'border-box'}} src={bmsrc} width='100%' alt=''/>
           }}
           body={({navId})=>{
-            // return (
-            //   <OrderPopup
-            //     order={{buyer:'محمد فیض',address:'تهران شیخ هایی شمالی',latitude:35.699739,longitude:51.338097,phone:'09123534314',number:'6544634',saler:'عنایتی',status:'0',date:new Date().getTime() - (25 * 60 * 60 * 1000),province:'تهران',city:'تهران',amount:123665000}}
-            //   />
-            // )
             if(navId === 'orders'){return <Orders/>}
             if(navId === 'salers'){return <Salers/>}
           }}
           header={()=><Header/>}
-          getState={({addPopup,removePopup})=>{
+          getActions={({addPopup,removePopup})=>{
             this.setState({addPopup,removePopup})
           }}
         />

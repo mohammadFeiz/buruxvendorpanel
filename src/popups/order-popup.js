@@ -207,6 +207,7 @@ export default class OrderPopup extends Component {
             <RVD
                 layout={{
                     className: 'p-12 ofy-auto',
+                    style:{background:'#fff',height:'100%'},
                     column: [
                         this.header_layout(buyer, phone, amount),
                         this.lineSplitter_layout(),
