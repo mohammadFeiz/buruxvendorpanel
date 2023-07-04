@@ -8,6 +8,7 @@ import OrderPopup from './popups/order-popup';
 import bmsrc from './images/bm.png';
 import {Icon} from '@mdi/react';
 import Orders from './pages/orders';
+import Salers from './pages/salers';
 import {mdiListBoxOutline,mdiStoreOutline,mdiAccountCircle,mdiExitToApp,mdiAccount} from '@mdi/js';
 import AppContext from './app-context';
 import './App.css';
@@ -75,6 +76,7 @@ class BVP extends Component{
             //   />
             // )
             if(navId === 'orders'){return <Orders/>}
+            if(navId === 'salers'){return <Salers/>}
           }}
           header={()=><Header/>}
           getState={({addPopup,removePopup})=>{

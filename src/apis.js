@@ -10,6 +10,9 @@ export default function getResponse(){
         },
         get_salers_by_coords(){
             return {mock:true}
+        },
+        get_salers(){
+            return {mock:true}
         }
     }
 }
@@ -162,6 +165,35 @@ export function getMock(){
                 {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
                 {name:'محمد رضا پور نامدار',phone:'09123534314',distance:3.5,latitude:35.699720 + getRandom(),longitude:51.338080 + getRandom()},
                 
+            ]
+        },
+        get_salers(){
+            return [
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
+                {name:"دانیال عنایتی",code:'c23222',state:'تهران',city:'تهران',phone:'09123534314',status:'فعال'},
             ]
         }
     }
