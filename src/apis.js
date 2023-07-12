@@ -11,8 +11,18 @@ export default function getResponse(){
         get_salers_by_coords(){
             return {mock:true}
         },
-        get_salers(){
-            return {mock:true}
+        async get_salers(){
+            debugger
+            var result = await Axios.get("https://localhost:44340/api/v1/Sellers/GetAllSellers");
+            result = result.data.data.data;
+            //name:"دانیال عنایتی",code:'c23222',province:'تهران',
+            //city:'تهران',phone:'09123534314',
+            //status:'فعال',visitorName:'محمد فیض',visitorCode:'c123123',
+            //shopName:'ممد استور',shopPhone:'02188050006',latitude:35.699720,longitude:51.338080,address:'تهران خیابان دوم همون اطراف'
+            result = result.map((o)=>  { return {name : o.firstName + ' ' + o.lastName , code : o.cardCode , province : o.userProvince ,
+                                                city : o.userCity , phone : o.phoneNumber , status : o.status , visitorName : "" , visitorCode : "" ,
+                                                shopName : o.storeName , latitude : o.latitude ,  longitude : o.longitude ,address : o.address }});
+            return {result:result}
         },
         getBazargahDetailsBySaler(){
             return {mock:true}
