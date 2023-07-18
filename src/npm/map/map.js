@@ -156,7 +156,6 @@ export default class Map extends Component {
                         this.marker = L.marker([latitude, longitude])
                             .addTo(myMap)
                             .bindPopup('I am a popup.');
-                        
                         if (onClick) {
                             myMap.on('click', (e) => onClick());
                         }
@@ -339,7 +338,7 @@ const NeshanMap = (props) => {
     const { style, options, onInit } = props;
     const mapEl = useRef(null);
     const [init, setInit] = useState(false)
-    
+
     const defaultStyle = {
         width: "600px",
         height: "450px",
