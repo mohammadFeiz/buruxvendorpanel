@@ -1,6 +1,5 @@
 .aio-input-form{
     width:100%;
-    border:1px solid #ddd;
     font-size:14px;
 }
 .aio-input-form-rtl{
@@ -81,4 +80,7 @@
 .aio-input-form .aio-input{
     border:1px solid #ddd;
     min-height:36px;
+}
+.aio-input-form .aio-input-options{
+    max-height:300px;
 }
