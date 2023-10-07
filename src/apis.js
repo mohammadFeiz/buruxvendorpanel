@@ -5,15 +5,23 @@ export default function getResponse(){
         order_status_dic(){
             return {mock:true}
         },
-        get_orders(){
-            return {mock:true}
+        async get_orders(){
+            debugger
+            let result = await Axios.get("https://localhost:44340/api/v1/Orders/GetAllOrders");
+            result = result.data.data.data;
+            result = result.map((o)=>  { return {id : o.id , buyer : o.buyerName , address : o.shippingAddress , latitude : o.latitude ,
+                                                phone : o.receiverNumber ,  number : o.orderNumber ,
+                                                saler : "" , status : o.status , date : o.orderDate ,
+                                                province : o.province , city : o.city ,
+                                                amount : o.finalAmount }});
+            return {result:result}
         },
         get_salers_by_coords(){
             return {mock:true}
         },
         async get_salers(){
             debugger
-            var result = await Axios.get("https://localhost:44340/api/v1/Sellers/GetAllSellers");
+            var result = await Axios.get("https://localhost:44340/api/v1/Vendors/GetAllVendors");
             result = result.data.data.data;
             result = result.map((o)=>  { return {name : o.firstName + ' ' + o.lastName , code : o.cardCode , province : o.userProvince ,
                                                 city : o.userCity , phone : o.phoneNumber , status : o.status , visitorName : "" , visitorCode : "" ,
