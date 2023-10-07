@@ -1,6 +1,31 @@
 import React, { Component, createRef } from "react";
 import $ from "jquery";
-export default class Canvas extends Component {
+export default class Canvas{
+  mp = {};
+  constructor(){
+    this.size = [0,0]
+  }
+  listenToMousePosition = (mp)=>{
+    this.mousePosition = mp;
+  }
+  canvasToClient = ()=>{return [100,100]}
+  clientToCanvas = ()=>{return [0,0]}
+  getActions = ({clientToCanvas,canvasToClient})=>{
+    this.clientToCanvas = clientToCanvas;
+    this.canvasToClient = canvasToClient;
+  }
+  render = (props)=>{
+    return (
+      <CANVAS 
+        {...props} 
+        listenToMousePosition={this.listenToMousePosition.bind(this)} 
+        getActions={(obj)=>this.getActions(obj)}
+        getSize={(size)=>this.size = size}
+      />
+    )
+  }
+}
+class CANVAS extends Component {
   constructor(props) {
     super(props);
     this.PI = Math.PI / 180;
@@ -8,14 +33,21 @@ export default class Canvas extends Component {
     this.width = 0;
     this.height = 0;
     this.touch = "ontouchstart" in document.documentElement;
+    this.state = {screenPosition:props.screenPosition}
+    if(props.onPan === true){
+      this.getScreenPosition = ()=>this.state.screenPosition
+      this.setScreenPosition = (screenPosition)=>this.setState({screenPosition})
+    }
+    else{
+      this.getScreenPosition = ()=>this.props.screenPosition
+      this.setScreenPosition = (screenPosition)=>props.onPan(screenPosition)
+    }
     $(window).on("resize", this.resize.bind(this));
     this.mousePosition = [Infinity, Infinity];
-    if(this.props.canvasToClient){
-      this.props.canvasToClient(this.canvasToClient.bind(this));
-    }
-    if(this.props.clientToCanvas){
-      this.props.clientToCanvas(this.clientToCanvas.bind(this));
-    }
+    props.getActions({
+      canvasToClient:this.canvasToClient.bind(this),
+      clientToCanvas:this.clientToCanvas.bind(this)
+    })
   }
   getPrepDip(line){
     var dip = this.getDip(line);
@@ -123,7 +155,22 @@ export default class Canvas extends Component {
     if(dip.m === Infinity){return false}
     return dip.m * (x - point[0]) + point[1];
   }
-
+  getPopintsByNGon(radius,count,corner){
+    let ang = (180 - (360 / count));
+    let w = +(Math.cos(ang / 2 * Math.PI / 180) * radius).toFixed(6) * 2;
+    let h = +(Math.sin(ang / 2 * Math.PI / 180) * radius).toFixed(6);
+    let p1 = [0,-h,corner];
+    let p2 = [0 + w / 2,-h,corner];
+    let points = [p1,p2];
+    let a = 360 / count;
+    for(let i = 0; i < count - 1; i++){
+      let p = [points[i + 1][0]+(Math.cos(a * Math.PI / 180) * w),points[i + 1][1] + (Math.sin(a * Math.PI / 180) * w),corner];
+      a += 360 / count;
+      points.push(p)
+    }
+    points.push(p1);
+    return points;
+  }
   getXOnLineByY(obj){ // get {y,line} or {y,point,dip}
     var {y,line,point = line[0],dip = this.getDip(line)} = obj;
     if(dip.m === 0){return false}
@@ -227,45 +274,6 @@ export default class Canvas extends Component {
         );
       }
     }
-    if (item.trianglePoints !== undefined) {
-      if (
-        !Array.isArray(item.trianglePoints) ||
-        item.trianglePoints.length !== 2
-      ) {
-        console.error(
-          "r-canvas => item.trianglePoint must be an array with 2 member!!!"
-        );
-      }
-      if (
-        !Array.isArray(item.trianglePoints[0]) ||
-        item.trianglePoints[0].length !== 2
-      ) {
-        console.error(
-          "r-canvas => item.trianglePoint[0] must be an array with 2 numeric member!!!"
-        );
-      }
-      if (
-        !Array.isArray(item.trianglePoints[1]) ||
-        item.trianglePoints[1].length !== 2
-      ) {
-        console.error(
-          "r-canvas => item.trianglePoint[1] must be an array with 2 numeric member!!!"
-        );
-      }
-      if (
-        !Array.isArray(item.trianglePoints[0]) ||
-        item.trianglePoints[0].length !== 2
-      ) {
-        console.error(
-          "r-canvas => item.trianglePoint[0] must be an array with 2 numeric member!!!"
-        );
-      }
-      if (isNaN(item.trianglewidth) || item.triangleWidth < 0) {
-        console.error(
-          "r-canvas => item.triangleWidth must be a number greater than or equal 0"
-        );
-      }
-    }
   }
   resize() {
     this.timer = 0;
@@ -306,20 +314,43 @@ export default class Canvas extends Component {
       y - (-this.getValueByRange(py, 0, this.height))
     ];
   }
-  getItem(item, parent = {}) {
+  //notice index and length use in eval and seems not used but used
+  getItem(item, parent = {},index,length) {
     var {
       x: parentx = 0,
       y: parenty = 0,
       rotate: parentrotate = 0,
-      opacity: parentOpacity = 1
+      opacity: parentOpacity = 1,
+      fill:parentFill,
+      stroke:parentStroke,
+      sequence = []
     } = parent;
-    var { debugMode,lineWidth } = this.props;
+    let sequenceProps = {};
+    try{
+      for(let i = 0; i < sequence.length; i++){
+        let [prop,statement] = sequence[i].split(':');
+        eval(`sequenceProps.${prop} = ${statement}`)
+      }
+    }
+    catch{}
+    var { debugMode } = this.props;
     var originalItem = typeof item === "function" ? { ...item(this.props) } : item;
     var type = originalItem.type;
     if(!type){console.error('RCanvas => missing type in item:')}
     var updatedItem = JSON.parse(JSON.stringify(originalItem));
     //set default props
-    updatedItem = {...{showPivot: false,lineJoin: "miter",lineCap: "butt",rotate: 0,x: 0,y: 0,lineWidth: 1,opacity: 1},lineWidth,...updatedItem};
+    let {
+      fill = sequenceProps.fill || parentFill,
+      stroke = sequenceProps.stroke || parentStroke,
+      rotate = sequenceProps.rotate || 0,
+      x = sequenceProps.x || 0,
+      y = sequenceProps.y || 0,
+      slice = sequenceProps.slice,
+      opacity = sequenceProps.opacity || 1,
+      lineWidth = sequenceProps.lineWidth || this.props.lineWidth || 1,
+      r = sequenceProps.r
+    } = updatedItem;
+    updatedItem = {...{showPivot: false,lineJoin: "miter",lineCap: "butt"},...updatedItem,fill,stroke,rotate,slice,opacity,lineWidth,r,x,y};
     updatedItem.items = originalItem.items;
     updatedItem.rect = false;
     if (!updatedItem.stroke && !updatedItem.fill) {updatedItem.stroke = "#000";}
@@ -349,16 +380,41 @@ export default class Canvas extends Component {
       height = this.getValueByRange(height, 0, this.height);
       let [c0 = 0, c1 = 0, c2 = 0, c3 = 0] = corner;
       updatedItem.rect = true;
-      var [x, y] = updatedItem.pivotedCoords;
+      let [x, y] = updatedItem.pivotedCoords;
       updatedItem.points = [[x + width / 2, -y],[x + width, -y, c1],[x + width, -y + height, c2],[x, -y + height, c3],[x, -y, c0],[x + width / 2, -y, c1]];
+    }
+    else if (type === 'NGon') {
+      updatedItem.type = 'Line';
+      let { r = 20, count = 6, corner = 0 ,x,y} = updatedItem;
+      updatedItem.points = this.getPopintsByNGon(r,count,corner);
     }  
     else if (type === 'Triangle') {
-      let { corner = [],trianglePoints,triangleWidth } = updatedItem;
-      var [p1, p2] = trianglePoints;
-      var width = triangleWidth;
-      var t1 = this.getPrependicularPointFromLine(p1, p2, "start", width / 2);
-      var t2 = this.getPrependicularPointFromLine(p1, p2, "start", -width / 2);
-      updatedItem.points = [[p1[0], p1[1], corner[0]],[t1.x, t1.y, corner[1]],[p2[0], p2[1], corner[2]],[t2.x, t2.y],p1];
+      updatedItem.type = 'Line';
+      let { corner = [],width = 50,height = 100,x,y } = updatedItem;
+      if(!Array.isArray(corner)){
+        corner = [corner];
+      }
+      let c1,c2,c3;
+      if(corner.length === 0){
+        c1 = 0; c2 = 0; c3 = 0;
+      }
+      else if(corner.length === 1){
+        c1 = corner[0]; c2 = corner[0]; c3 = corner[0];
+      }
+      else if(corner.length === 2){
+        c1 = corner[0]; c2 = corner[1]; c3 = corner[0];
+      }
+      else {
+        c1 = corner[0]; c2 = corner[1]; c3 = corner[2];
+      }
+      updatedItem.points = [
+        [0,0,0],
+        [width / 2, 0,c1],
+        [0,height,c2],
+        [-width / 2 , 0,c3],
+        [0,0,0]
+      ];
+      console.log(updatedItem.points)
     }
     var result = {...originalItem,...updatedItem};
     return result;
@@ -367,7 +423,7 @@ export default class Canvas extends Component {
     var Items = typeof items === "function" ? items() : items;
     var { zoom } = this.props,ctx = this.ctx;
     for (var i = 0; i < Items.length; i++) {
-      let item = this.getItem(Items[i], parent);
+      let item = this.getItem(Items[i], parent,i,Items.length);
       if (item.show === false) {continue;}
       ctx.save();
       ctx.beginPath();
@@ -411,7 +467,19 @@ export default class Canvas extends Component {
   }
   drawGroup(item, index) {
     var [X, Y] = item.pivotedCoords;
-    this.draw(item.items,{ x: X, y: Y, rotate: item.rotate, opacity: item.opacity },index);
+    let items = [];
+    if(item.repeatChilds){
+      for(let i = 0; i < item.items.length; i++){
+        let itm = item.items[i];
+        let {repeat = 0,showPivot} = itm;
+        for(let j = 0; j < repeat; j++){
+          items.push({...itm,isRepeat:j > 0 ,showPivot:j === 0?showPivot:false})
+        }
+      }
+    }
+    else {items = item.items;}
+    
+    this.draw(items,{ x: X, y: Y, rotate: item.rotate, opacity: item.opacity,fill:item.fill,stroke:item.stroke,sequence:item.sequence },index);
   }
   drawText({align = [0, 0],fontSize = 12,fontFamily = 'arial',text = "Text",fill,stroke,pivotedCoords}) {
     var { zoom } = this.props,[X, Y] = pivotedCoords,[textAlign, textBaseline] = this.getTextAlign(align);
@@ -520,7 +588,7 @@ export default class Canvas extends Component {
     dom[0].width = this.width;
     dom[0].height = this.height;
     this.axisPosition = [this.width / 2,this.height / 2];
-    if (getSize) {getSize(this.width, this.height);}
+    if (getSize) {getSize({x:this.width, y:this.height});}
     if (grid) {dom.css(this.getBackground(grid, zoom, this.width, this.height));}
     this.clear();
     this.setScreen();
@@ -538,8 +606,10 @@ export default class Canvas extends Component {
     this.draw([{ type:'Line',points: [[0, -4002], [0, 4000]], stroke, dash },{ type:'Line',points: [[-4002, 0], [4000, 0]], stroke, dash }]);
   }
   componentDidMount() {
+    let {onMount = ()=>{}} = this.props;
     this.ctx = this.ctx || this.dom.current.getContext("2d");
     this.update();
+    onMount()
   }
   componentDidUpdate() {this.update()}
   getColor(color, { x = 0, y = 0 }) {
@@ -589,7 +659,7 @@ export default class Canvas extends Component {
     this.eventHandler("window", "mousemove", $.proxy(this.panmousemove, this));
     this.eventHandler("window", "mouseup", $.proxy(this.panmouseup, this));
     this.panned = false;
-    var { screenPosition } = this.props;
+    let screenPosition = this.getScreenPosition();
     var client = this.getClient(e);
     this.startOffset = {x: client.x,y: client.y,endX: screenPosition[0],endY: screenPosition[1]};
   }
@@ -598,19 +668,19 @@ export default class Canvas extends Component {
     this.eventHandler("window", "mouseup", this.panmouseup, "unbind");
   }
   panmousemove(e) {
-    var so = this.startOffset,{ zoom, onPan } = this.props,coords = this.getClient(e);
+    var so = this.startOffset,{ zoom } = this.props,coords = this.getClient(e);
     //if(!this.panned && this.getLength({x:so.x,y:so.y},coords) < 5){return;}
     this.panned = true;
     var x = (so.x - coords.x) / zoom + so.endX,y = (coords.y - so.y) / zoom + so.endY;
-    onPan([x, y]);
+    this.setScreenPosition([x, y]);
   }
   onMouseDown(e) {
-    const { events, onPan } = this.props;
+    const { events } = this.props;
     this.mousePosition = this.getMousePosition(e);
     this.eventMode = "onMouseDown";
     this.update();
     if (this.item) {this.item.onMouseDown(e, this.mousePosition,this.item, this.props)} 
-    else if (onPan) {this.panmousedown(e)} 
+    else if (this.setScreenPosition) {this.panmousedown(e)} 
     else if (events.onMouseDown) {events.onMouseDown(e, this.mousePosition)}
     this.item = false; this.eventMode = false;
   }
@@ -633,12 +703,14 @@ export default class Canvas extends Component {
     this.item = false; this.eventMode = false;
   }
   onMouseMove(e) {
-    var { events } = this.props;
+    var { events,listenToMousePosition } = this.props;
     this.mousePosition = this.getMousePosition(e);
     if(events.onMouseMove){events.onMouseMove(e, this.mousePosition)}
+    listenToMousePosition(this.mousePosition)
   }
   setScreen() {
-    var { zoom, screenPosition } = this.props;
+    var { zoom } = this.props;
+    let screenPosition = this.getScreenPosition();
     var canvas = this.dom.current;
     this.screenX = -this.getValueByRange(screenPosition[0],0,this.width / zoom) * zoom;
     this.screenY = this.getValueByRange(screenPosition[1],0,this.height / zoom) * zoom;
@@ -651,7 +723,7 @@ export default class Canvas extends Component {
     $(canvas).css({backgroundPosition: this.translate.x + "px " + this.translate.y + "px"});
   }
   
-  canvasToClient(obj){
+  canvasToClient(obj,addOffset){
     if(!obj){return false;}
     var [x,y] = obj;
     if(this.screenX === undefined){return false}
@@ -664,16 +736,17 @@ export default class Canvas extends Component {
         x,y
     ];
   }
-  clientToCanvas([X,Y]){
+  clientToCanvas([X,Y],a = true){
     var { zoom } = this.props;
-    var offset = $(this.dom.current).offset();
+    var offset = a?$(this.dom.current).offset():{left:0,top:0};
     var client = [X - offset.left + window.pageXOffset,Y - offset.top + window.pageYOffset];
     return [Math.floor((client[0] - this.axisPosition[0] - this.screenX) / zoom),-Math.floor((client[1] - this.axisPosition[1] - this.screenY) / zoom)];
   }
   getMousePosition(e,touch) {
     var client = this.getClient(e,touch);
     var [x,y] = this.clientToCanvas([client.x,client.y]);
-    return {x, y, px:(x * 100) / this.width, py:(y * 100) / this.height};
+    let [cx,cy] = this.canvasToClient([x,y])
+    return {x, y, px:(x * 100) / this.width, py:(y * 100) / this.height,cx,cy};
   }
   render() {
     var { id, style, className ,events} = this.props;
@@ -693,6 +766,6 @@ export default class Canvas extends Component {
     return <canvas {...props}/> ;
   }
 }
-Canvas.defaultProps = {
+CANVAS.defaultProps = {
   zoom: 1,selectable: false,screenPosition: [0, 0],items: [],events:{},rotateDirection: "clockwise",
 };

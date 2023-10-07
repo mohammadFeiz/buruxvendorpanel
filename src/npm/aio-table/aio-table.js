@@ -405,6 +405,12 @@ export default class Table extends Component {
     let {paging} = this.state;
     if(!paging){return false}
     let {rtl,model} = this.props;
+    try{
+      if(this.props.paging.length !== this.state.paging.length){
+        setTimeout(()=>this.setState({paging:this.props.paging}),0)
+      }
+    }
+    catch{console.log()}
     let {number = 1,sizes = [1,5,10,15,20,30,40,50,70,100,150,200],size = sizes[0],length = model.length} = paging;
     let pages = Math.ceil(length / size);
     paging.sizes = sizes;
@@ -1014,6 +1020,7 @@ class Cell extends Component{
         className:TableCLS.cellContent,style:{height:'100%'},align:'v',flex:1,
         column:[
           {html:this.getContent(row,column,value),align:column.justify?'vh':'v',className:'of-visible'},
+          {size:3},
           {html:subtext,className:TableCLS.cellSubtext,align:column.justify?'vh':'v'},
         ]
       }
