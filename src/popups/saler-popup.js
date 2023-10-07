@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RVD from './../npm/react-virtual-dom/react-virtual-dom';
-import Map from "../npm/map/map";
+import AIOMap from "../npm/aio-map/aio-map";
 import storesrc from './../images/store.png';
 import { Icon } from '@mdi/react';
 import { mdiAccountCircle } from "@mdi/js";
@@ -14,9 +14,9 @@ export default class OrderPopup extends Component {
         }
     }
     componentDidMount() {
-        let { apis } = this.context;
+        let { state } = this.context;
         let { saler } = this.props;
-        apis({
+        state.apis({
             api: 'getBazargahDetailsBySaler',
             name: 'دریافت اطلاعات بازارگاه بر اساس فروشنده',
             parameter: saler,
@@ -94,8 +94,11 @@ export default class OrderPopup extends Component {
                         {
                             flex: 1,
                             html: (
-                                <Map
-                                    apiKey={'web.b4368cdb3d0c40189e97cd027bb821bb'}
+                                <AIOMap
+                                    apiKeys={{
+                                        map:'web.68bf1e9b8be541f5b14686078d1e48d2',
+                                        service:'service.30c940d0eff7403f9e8347160e384cc9'
+                                    }}
                                     latitude={latitude} longitude={longitude}
                                     style={{ width: '100%', height: '100%' }}
                                 />

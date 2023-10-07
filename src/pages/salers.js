@@ -13,8 +13,8 @@ export default class Salers extends Component{
         this.state = {items:[]}
     }
     componentDidMount(){
-        let {apis} = this.context;
-        apis({
+        let {state} = this.context;
+        state.apis({
             api:'get_salers',
             name:'دریافت لیست سفارشات فروشندگان',
             callback:(items)=>{
@@ -30,10 +30,10 @@ export default class Salers extends Component{
                 <Table
                     templates={{
                         popup:(row)=>{
-                            let {openPopup} = this.context;
+                            let {actions} = this.context;
                             return (
                                 <Icon path={mdiDotsHorizontal} size={1} onClick={()=>{
-                                    openPopup('saler',row)
+                                    actions.openPopup('saler',row)
                                 }}/>
                             )
                         }

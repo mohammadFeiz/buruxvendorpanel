@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import RVD from './../npm/react-virtual-dom/react-virtual-dom';
-import Map from "../npm/map/map";
+import AIOMap from "../npm/aio-map/aio-map";
 import storesrc from './../images/store.png';
 import { Icon } from '@mdi/react';
-import { mdiAccountCircle } from "@mdi/js";
+import { mdiAccountCircle,mdiMapMarker,mdiMarker,mdiOfficeBuilding, mdiStar } from "@mdi/js";
 import AppContext from "../app-context";
 export default class OrderPopup extends Component {
     static contextType = AppContext
     constructor(props) {
         super(props);
         this.state = {
+            order:props.order,
             salers: []
         }
     }
     componentDidMount() {
-        let { apis } = this.context;
-        let { order } = this.props;
+        let { state } = this.context;
+        let { order } = this.state;
         let { latitude, longitude } = order;
-        apis({
+        state.apis({
             api: 'get_salers_by_coords',
             name: 'دریافت لیست فروشندگان بر اساس موقعیت',
             parameter: { latitude, longitude },
@@ -59,7 +60,6 @@ export default class OrderPopup extends Component {
         }
     }
     delivery_layout(province, city, address, latitude, longitude) {
-        let { salers } = this.state;
         return {
             size: 300,
             column: [
@@ -78,38 +78,14 @@ export default class OrderPopup extends Component {
                         {
                             flex: 1,
                             html: (
-                                <Map
-                                    apiKey={'web.b4368cdb3d0c40189e97cd027bb821bb'}
+                                <AIOMap
+                                    apiKeys={{
+                                        map:'web.68bf1e9b8be541f5b14686078d1e48d2',
+                                        service:'service.30c940d0eff7403f9e8347160e384cc9'
+                                    }}
                                     latitude={latitude}
                                     longitude={longitude}
                                     style={{ width: '100%', height: '100%' }}
-                                    points={salers.map(({ latitude, longitude, name, phone }) => {
-                                        return {
-                                            latitude, longitude, icon: `
-                                            <div style="position:absolute;left:-9px;top:-9px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve">
-                                                <defs>
-                                                </defs>
-                                                <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
-                                                    <path d="M 9 33.294 l 0 46.274 c 0 1.576 1.278 2.854 2.854 2.854 h 66.293 c 1.576 0 2.854 -1.278 2.854 -2.854 l 0 -46.274 l 0 -13.301 c 0 -1.576 -1.278 -2.854 -2.854 -2.854 H 11.854 C 10.278 17.14 9 18.417 9 19.993 L 9 33.294 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(64,89,107); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <path d="M 69.335 43.125 H 54.623 c -1.176 0 -2.13 0.954 -2.13 2.13 v 33.307 h 18.972 V 45.255 C 71.465 44.079 70.511 43.125 69.335 43.125 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(214,224,235); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <path d="M 41.403 68.023 H 20.565 c -1.121 0 -2.03 -0.909 -2.03 -2.03 V 45.155 c 0 -1.121 0.909 -2.03 2.03 -2.03 h 20.839 c 1.121 0 2.03 0.909 2.03 2.03 v 20.839 C 43.433 67.115 42.524 68.023 41.403 68.023 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(214,224,235); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <path d="M 9.2 33.294 H 8.8 c -4.86 0 -8.8 -3.94 -8.8 -8.8 l 0 -3.054 c 5.481 -1.841 11.432 -2.016 18 0 v 3.054 C 18 29.354 14.06 33.294 9.2 33.294 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(231,78,58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <path d="M 27.2 33.294 h -0.4 c -4.86 0 -8.8 -3.94 -8.8 -8.8 V 21.44 c 6.388 -1.301 12.427 -1.433 18 0 v 3.054 C 36 29.354 32.06 33.294 27.2 33.294 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(176,182,188); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <path d="M 80.8 33.294 h 0.4 c 4.86 0 8.8 -3.94 8.8 -8.8 V 21.44 c -5.589 -1.483 -11.652 -1.253 -18 0 v 3.054 C 72 29.354 75.94 33.294 80.8 33.294 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(231,78,58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <path d="M 62.8 33.294 h 0.4 c 4.86 0 8.8 -3.94 8.8 -8.8 V 21.44 c -6 -2.558 -12 -2.558 -18 0 v 3.054 C 54 29.354 57.94 33.294 62.8 33.294 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(176,182,188); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <path d="M 36 21.44 c 0.929 -3.982 0.861 -8.649 0 -13.861 H 23.225 c -3.432 4.62 -5.173 9.241 -5.225 13.861 H 36 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(214,224,235); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <polygon points="0,21.44 11.39,7.58 23.23,7.58 18,21.44 " style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,112,88); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-                                                    <path d="M 54 21.44 c -2.167 -4.489 -1.851 -9.128 0 -13.861 h 12.775 c 4.264 5.189 6.219 9.858 5.225 13.861 H 54 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(214,224,235); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <polygon points="90,21.44 78.61,7.58 66.78,7.58 72,21.44 " style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,112,88); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-                                                    <path d="M 45.2 33.294 h -0.4 c -4.86 0 -8.8 -3.94 -8.8 -8.8 V 21.44 c 6 -2.558 12 -2.558 18 0 v 3.054 C 54 29.354 50.06 33.294 45.2 33.294 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(231,78,58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                                    <polygon points="36,7.58 46.77,7.58 54,7.58 54,21.44 36,21.44 " style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,112,88); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-                                                </g>
-                                            </svg>
-                                            </div>
-                                            `
-                                        }
-                                    })}
                                 />
                             )
                         }
@@ -119,7 +95,8 @@ export default class OrderPopup extends Component {
         }
     }
     status_layout(status) {
-        let { order_status_dic = {} } = this.context;
+        let { state } = this.context;
+        let { order_status_dic = {} } = state;
         let keys = Object.keys(order_status_dic);
         let statusItem = order_status_dic[status] || []
         return {
@@ -143,12 +120,16 @@ export default class OrderPopup extends Component {
         }
     }
     statusButton_layout(key, status) {
-        let { order_status_dic = {} } = this.context;
-        let { changeStatus } = this.props;
+        let { state,actions } = this.context;
+        let { order_status_dic = {} } = state;
+        let { order } = this.state;
         let active = key === status;
         return {
             size: 96,
-            onClick: () => changeStatus(key),
+            onClick: async () => {
+                let res = await actions.changeOrder(order,{status:key});
+                if(res !== false){this.setState({order:res})}
+            },
             column: [
                 {
                     align: 'vh',
@@ -163,20 +144,63 @@ export default class OrderPopup extends Component {
             ]
         }
     }
+    salers_map_layout(status,latitude,longitude){
+        if(status !== '0'){return false}
+        let {salers = []} = this.state;
+        let markers = [{
+            latitude, longitude, 
+            size:36,
+            color:'dodgerblue',
+            html:<Icon path={mdiStar} style={{color:'orange'}} size={2}/>,
+            text:<div style={{fontFamily:'IRANSans-light',fontWeight:'bold',color:'dodgerblue',fontSize:14,background:'#ffffff90'}}>{'موقعیت سفارش'}</div>
+        }]
+        markers = markers.concat(salers.map(({ latitude, longitude, name, phone }) => {
+            return {
+                latitude, longitude, 
+                size:20,
+                color:'red',
+                html:<div style={{boxShadow:'0 0 0 6px red',borderRadius:'100%',width:12,height:12}}></div>,
+                text:<div style={{fontFamily:'IRANSans-light',fontWeight:'bold',color:'dodgerblue',fontSize:10,background:'#ffffff90'}}>{name}</div>
+            }
+        }))
+        return {
+            flex:1,
+            html:(
+                <AIOMap
+                    apiKeys={{
+                        map:'web.68bf1e9b8be541f5b14686078d1e48d2',
+                        service:'service.30c940d0eff7403f9e8347160e384cc9'
+                    }}
+                    showMarker={false}
+                    onZoom={true}
+                    latitude={latitude}
+                    longitude={longitude}
+                    style={{ width: '100%', height: 360 }}
+                    getActions={({flyTo})=>{
+                        this.flyTo = flyTo;
+                    }}
+                    markers={markers}
+                />
+            )
+        }
+    }
     salers_layout() {
         let { salers } = this.state;
 
         return {
-            style: { maxHeight: 300 },
+            flex:1,
+            style: { height: 360 },
             column: [
-                { html: 'لیست فروشندگان به ترتیب فاصله تا محل تحویل سفارش', className: 'link-color bold fs-20' },
                 { className: 'ofy-auto', flex: 1, column: salers.map((o) => this.saler_layout(o)) }
             ]
         }
     }
-    saler_layout({ name, phone, distance }) {
+    saler_layout({ latitude,longitude,name, phone, distance }) {
         return {
             className: 'fs-14', size: 48,
+            onClick:()=>{
+                if(this.flyTo){this.flyTo(latitude,longitude,18)}
+            },
             row: [
                 { html: <Icon path={mdiAccountCircle} size={1.2} />, align: 'vh' },
                 { size: 6 },
@@ -187,13 +211,13 @@ export default class OrderPopup extends Component {
                         { html: phone }
                     ]
                 },
-                { html: `${distance.toFixed(1)} کیلومتر تا محل تحویل سفارش`, align: 'v' },
+                { html: `${distance.toFixed(1)} کیلومتر `, align: 'v' ,style:{fontSize:12}},
                 { size: 6 },
                 {
                     align: 'vh',
                     html: (
                         <button
-                            className='button-1'
+                            className='button-1' style={{height:24,fontSize:12}}
                         >اخذ</button>
                     )
                 }
@@ -201,7 +225,7 @@ export default class OrderPopup extends Component {
         }
     }
     render() {
-        let { order } = this.props;
+        let { order } = this.state;
         let { buyer, phone, amount, province, city, address, latitude, longitude, status } = order;
         return (
             <RVD
@@ -213,7 +237,21 @@ export default class OrderPopup extends Component {
                         this.lineSplitter_layout(),
                         this.delivery_layout(province, city, address, latitude, longitude),
                         this.status_layout(status),
-                        this.salers_layout()
+                        {
+                            show:status === '0',
+                            column:[
+                                { html: 'لیست فروشندگان به ترتیب فاصله تا محل تحویل سفارش', className: 'link-color bold fs-20' },
+                                {size:12},
+                                {
+                                    row:[
+                                        this.salers_layout(),
+                                        {size:12},
+                                        this.salers_map_layout(status,latitude,longitude)
+                                    ]
+                                }
+                            ]
+                        },
+                        {size:24}
                     ]
                 }}
             />

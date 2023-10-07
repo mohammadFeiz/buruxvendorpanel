@@ -8,26 +8,13 @@ import { mdiDotsHorizontal } from "@mdi/js";
 import {Icon} from '@mdi/react';
 export default class Orders extends Component{
     static contextType = AppContext;
-    constructor(props){
-        super(props);
-        this.state = {items:[]}
-    }
-    componentDidMount(){
-        let {apis} = this.context;
-        apis({
-            api:'get_orders',
-            name:'دریافت لیست سفارشات',
-            callback:(items)=>{
-                this.setState({items})
-            }
-        })
-    }
     getDelta(date){
         let delta = AIODate().getDelta({date,pattern:'{day} روز و {hour} ساعت پیش'})
         return delta
     }
     table_layout(){
-        let {items} = this.state;
+        let {state} = this.context;
+        let {orders} = state;
         return {
             flex:1,
             html:(
@@ -38,10 +25,10 @@ export default class Orders extends Component{
                             if(row.date){return AIODate().toJalali({date:row.date,pattern:'{year}/{month}/{day} {hour}:{minute}'})}
                         },
                         popup:(row)=>{
-                            let {openPopup} = this.context;
+                            let {actions} = this.context;
                             return (
                                 <Icon path={mdiDotsHorizontal} size={1} onClick={()=>{
-                                    openPopup('order',row)
+                                    actions.openPopup('order',row)
                                 }}/>
                             )
                         }
@@ -56,7 +43,7 @@ export default class Orders extends Component{
                         {title:'استان',field:'row.province'},
                         {title:'مبلغ  (تومان)',field:'row.amount',template:'amount'},
                     ]}
-                    model={items}
+                    model={orders}
                 />
             )
         }

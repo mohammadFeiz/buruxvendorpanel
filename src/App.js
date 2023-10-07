@@ -24,70 +24,75 @@ class BVP extends Component{
   constructor(props){
     super(props);
     this.state = {
-      apis:AIOService({
-        id:'bvpapis',
-        getResponse,
-        getMock
+      rsa:new RSA({
+        id:'bvp',rtl:true,
+        navId:'orders',
+        AppContext,
+        navs:[
+          {text:'سفارشات',icon:<Icon path={mdiListBoxOutline} size={1}/>,id:'orders'},
+          {text:'فروشندگان',icon:<Icon path={mdiStoreOutline} size={1}/>,id:'salers'},
+          {text:'مدیریت کاربران',icon:<Icon path={mdiAccount} size={1}/>,id:'user manager'}
+        ],
+        navHeader:()=>{
+          return <img className='p-12 p-t-48' style={{boxSizing:'border-box'}} src={bmsrc} width='100%' alt=''/>
+        },
+        initialState:{
+          apis:AIOService({id:'bvpapis',getResponse,getMock}),
+          userInfo:{name:'دانیال عنایتی'},
+          order_status_dic:{},
+          orders:[]    
+        },
+        actions:{
+          openPopup:this.openPopup.bind(this),
+          changeOrder:this.changeOrder.bind(this)
+        },
+        body:({navId})=>{
+          if(navId === 'orders'){return <Orders/>}
+          if(navId === 'salers'){return <Salers/>}
+        },
+        headerContent:()=><Header/>
       }),
-      userInfo:{name:'دانیال عنایتی'},
-      order_status_dic:{}
-    }
-  }
-  getContext(){
-    return {
-      openPopup:this.openPopup.bind(this),
-      ...this.state
+      
+      
     }
   }
   componentDidMount(){
-    let {apis} = this.state;
-    apis({
+    let {rsa} = this.state;
+    rsa.state.apis({
       api:'order_status_dic',
-      callback:(order_status_dic)=>this.setState({order_status_dic})
+      callback:(order_status_dic)=>rsa.SetState('order_status_dic',order_status_dic)
     })
+    rsa.state.apis({api:'get_orders',name:'دریافت لیست سفارشات',callback:(orders)=>rsa.SetState('orders',orders)})
+  }
+  changeOrder(order,changeObject){
+    let {rsa} = this.state;
+    let {orders} = rsa.state;
+    let newOrder = {...order,...changeObject};
+    let newOrders = orders.map((o)=>o.id === order.id?newOrder:o);
+    rsa.SetState('orders',newOrders)
+    return newOrder
   }
   openPopup(key,parameter){
-    let {addPopup} = this.state;
+    let {rsa} = this.state;
     if(key === 'order'){
-      addPopup({
-        type:'fullscreen',
-        title:`شماره فاکتور ${parameter.number}`,
-        body:()=><OrderPopup order={parameter}/>
+      rsa.addModal({
+        position:'right',
+        attrs:{style:{width:'90vw'}},
+        header:{title:`شماره فاکتور ${parameter.number}`},
+        body:{render:()=><OrderPopup order={parameter}/>}
       })
     }
     if(key === 'saler'){
-      addPopup({
-        type:'fullscreen',
-        //title:`شماره فاکتور ${parameter.number}`,
-        body:()=><SalerPopup saler={parameter}/>
+      rsa.addModal({
+        position:'fullscreen',
+        //header:{title:`شماره فاکتور ${parameter.number}`},
+        body:{render:()=><SalerPopup saler={parameter}/>}
       })
     }
   }
   render(){
-    return (
-      <AppContext.Provider value={this.getContext()}>
-        <RSA
-          id='bvp'
-          navId='orders'
-          navs={[
-            {text:'سفارشات',icon:<Icon path={mdiListBoxOutline} size={1}/>,id:'orders'},
-            {text:'فروشندگان',icon:<Icon path={mdiStoreOutline} size={1}/>,id:'salers'},
-            {text:'مدیریت کاربران',icon:<Icon path={mdiAccount} size={1}/>,id:'user manager'}
-          ]}
-          navHeader={()=>{
-            return <img className='p-12 p-t-48' style={{boxSizing:'border-box'}} src={bmsrc} width='100%' alt=''/>
-          }}
-          body={({navId})=>{
-            if(navId === 'orders'){return <Orders/>}
-            if(navId === 'salers'){return <Salers/>}
-          }}
-          header={()=><Header/>}
-          getActions={({addPopup,removePopup})=>{
-            this.setState({addPopup,removePopup})
-          }}
-        />
-      </AppContext.Provider>
-    )
+    let {rsa} = this.state;
+    return rsa.render()
   }
 }
 
@@ -95,7 +100,7 @@ class BVP extends Component{
 class Header extends Component{
   static contextType = AppContext;
   render(){
-    let {userInfo,logout} = this.context;
+    let {state,logout} = this.context;
     return (
       <RVD
         layout={{
@@ -109,7 +114,7 @@ class Header extends Component{
                   options={[
                     {text:'خروج از حساب کاربری',onClick:()=>logout(),before:<Icon path={mdiExitToApp} size={.7}/>}
                   ]}
-                  text={userInfo.name}
+                  text={state.userInfo.name}
                 />
               )
             }
