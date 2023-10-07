@@ -1,13 +1,12 @@
 import Axios from 'axios';
 
-export default function getResponse(){
+export default function getResponse({baseUrl}){
     return {
         order_status_dic(){
             return {mock:true}
         },
         async get_orders(){
-            debugger
-            let result = await Axios.get("https://localhost:44340/api/v1/Orders/GetAllOrders");
+            let result = await Axios.get(`${baseUrl}/api/v1/Orders/GetAllOrders`);
             result = result.data.data.data;
             result = result.map((o)=>  { return {id : o.id , buyer : o.buyerName , address : o.shippingAddress , latitude : o.latitude ,
                                                 phone : o.receiverNumber ,  number : o.orderNumber ,
@@ -21,7 +20,7 @@ export default function getResponse(){
         },
         async get_salers(){
             debugger
-            var result = await Axios.get("https://localhost:44340/api/v1/Vendors/GetAllVendors");
+            var result = await Axios.get(`${baseUrl}/api/v1/Vendors/GetAllVendors`);
             result = result.data.data.data;
             result = result.map((o)=>  { return {name : o.firstName + ' ' + o.lastName , code : o.cardCode , province : o.userProvince ,
                                                 city : o.userCity , phone : o.phoneNumber , status : o.status , visitorName : "" , visitorCode : "" ,

@@ -23,6 +23,8 @@ export default class App extends Component{
 class BVP extends Component{
   constructor(props){
     super(props);
+    this.baseUrl = 'https://localhost:44340'
+    //this.baseUrl = 'https://localhost:44340'
     this.state = {
       rsa:new RSA({
         id:'bvp',rtl:true,
@@ -37,7 +39,8 @@ class BVP extends Component{
           return <img className='p-12 p-t-48' style={{boxSizing:'border-box'}} src={bmsrc} width='100%' alt=''/>
         },
         initialState:{
-          apis:AIOService({id:'bvpapis',getResponse,getMock}),
+          baseUrl:this.baseUrl,
+          apis:AIOService({id:'bvpapis',getResponse,getMock,baseUrl:this.baseUrl}),
           userInfo:{name:'دانیال عنایتی'},
           order_status_dic:{},
           orders:[]    
