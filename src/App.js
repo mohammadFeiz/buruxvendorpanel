@@ -23,8 +23,8 @@ export default class App extends Component{
 class BVP extends Component{
   constructor(props){
     super(props);
-    this.baseUrl = 'https://localhost:44340'
     //this.baseUrl = 'https://localhost:44340'
+    this.baseUrl = 'https://vendorpanelapi.miarze.com'
     this.state = {
       rsa:new RSA({
         id:'bvp',rtl:true,
@@ -72,7 +72,13 @@ class BVP extends Component{
     let {orders} = rsa.state;
     let newOrder = {...order,...changeObject};
     let newOrders = orders.map((o)=>o.id === order.id?newOrder:o);
-    rsa.SetState('orders',newOrders)
+    debugger
+    rsa.state.apis({
+      api:'changeOrder',
+      parameter:{newOrder},
+      callback:()=>rsa.SetState('orders',newOrders)
+    })
+    
     return newOrder
   }
   openPopup(key,parameter){

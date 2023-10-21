@@ -123,6 +123,7 @@ export default class OrderPopup extends Component {
         let { state,actions } = this.context;
         let { order_status_dic = {} } = state;
         let { order } = this.state;
+        debugger
         let active = key === status;
         return {
             size: 96,
